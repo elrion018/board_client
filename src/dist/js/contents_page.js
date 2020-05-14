@@ -12309,129 +12309,136 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
  /////
 
-var slug = location.href.split("?")[1];
+var slug = Number(location.href.split("?")[1]);
 var container_div = document.querySelector(".container");
 
 function goMain() {
   location.href = "index.html";
 }
 
-function getArticleDetail(_x) {
-  return _getArticleDetail.apply(this, arguments);
+function goEdit() {
+  location.replace("contents_edit_page.html?" + slug);
 }
 
-function _getArticleDetail() {
-  _getArticleDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(slug) {
-    var config, res;
+function addViews(_x) {
+  return _addViews.apply(this, arguments);
+}
+
+function _addViews() {
+  _addViews = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(article) {
+    var config, views, data, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             config = {};
-            _context.next = 4;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_GET_ARTICLE_DETAIL"])(slug), config);
-
-          case 4:
-            res = _context.sent;
-
-            if (!(res.status === 200)) {
-              _context.next = 7;
-              break;
-            }
-
-            return _context.abrupt("return", res.data);
+            views = article["views"] + 1;
+            data = new FormData();
+            data.append("views", views);
+            _context.next = 7;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_PUT_EDIT_ARTICLE"])(slug), data, config);
 
           case 7:
-            _context.next = 13;
+            res = _context.sent;
+
+            if (res.status === 200) {
+              console.log("add views");
+            }
+
+            _context.next = 15;
             break;
 
-          case 9:
-            _context.prev = 9;
+          case 11:
+            _context.prev = 11;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
             console.error(_context.t0);
 
-          case 13:
+          case 15:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 11]]);
   }));
-  return _getArticleDetail.apply(this, arguments);
+  return _addViews.apply(this, arguments);
 }
 
-function deleteArticleDetail() {
-  return _deleteArticleDetail.apply(this, arguments);
+function addRecommended() {
+  return _addRecommended.apply(this, arguments);
 }
 
-function _deleteArticleDetail() {
-  _deleteArticleDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var config, res;
+function _addRecommended() {
+  _addRecommended = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var config, article, recommended, data, res;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
             config = {};
-            console.log(slug, "ok");
-            _context2.next = 5;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), config);
+            article = getArticleDetail(slug);
+            recommended = article["recommended"] + 1;
+            data = new FormData();
+            data.append("recommended", recommended);
+            _context2.next = 8;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_PUT_EDIT_ARTICLE"])(slug), data, config);
 
-          case 5:
+          case 8:
             res = _context2.sent;
 
-            if (res.status === 204) {
-              console.log(res);
-              location.replace("index.html");
+            if (res.status === 200) {
+              console.log("add recommended");
+              location.reload();
             }
 
-            _context2.next = 13;
+            _context2.next = 16;
             break;
 
-          case 9:
-            _context2.prev = 9;
+          case 12:
+            _context2.prev = 12;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
             console.error(_context2.t0);
 
-          case 13:
+          case 16:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee2, null, [[0, 12]]);
   }));
-  return _deleteArticleDetail.apply(this, arguments);
+  return _addRecommended.apply(this, arguments);
 }
 
-function renderContents(_x2) {
-  return _renderContents.apply(this, arguments);
+function getArticleDetail(_x2) {
+  return _getArticleDetail.apply(this, arguments);
 }
 
-function _renderContents() {
-  _renderContents = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(slug) {
-    var article, trs, itemArr, i, new_td;
+function _getArticleDetail() {
+  _getArticleDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(slug) {
+    var config, res;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
-            _context3.next = 3;
-            return getArticleDetail(Number(slug));
+            config = {};
+            _context3.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_GET_ARTICLE_DETAIL"])(slug), config);
 
-          case 3:
-            article = _context3.sent;
-            trs = document.querySelectorAll("tr");
-            itemArr = ["title", "pub_date", "views", "recommended", "contents"];
+          case 4:
+            res = _context3.sent;
 
-            for (i = 0; i < itemArr.length; i++) {
-              new_td = document.createElement("td");
-              new_td.innerHTML = article[itemArr[i]];
-              trs[i].appendChild(new_td);
+            if (!(res.status === 200)) {
+              _context3.next = 7;
+              break;
             }
 
+            return _context3.abrupt("return", res.data);
+
+          case 7:
             _context3.next = 13;
             break;
 
@@ -12448,12 +12455,109 @@ function _renderContents() {
       }
     }, _callee3, null, [[0, 9]]);
   }));
+  return _getArticleDetail.apply(this, arguments);
+}
+
+function deleteArticleDetail() {
+  return _deleteArticleDetail.apply(this, arguments);
+}
+
+function _deleteArticleDetail() {
+  _deleteArticleDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var config, res;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            config = {};
+            _context4.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), config);
+
+          case 4:
+            res = _context4.sent;
+
+            if (res.status === 204) {
+              console.log(res);
+              location.replace("index.html");
+            }
+
+            _context4.next = 12;
+            break;
+
+          case 8:
+            _context4.prev = 8;
+            _context4.t0 = _context4["catch"](0);
+            console.log(_context4.t0);
+            console.error(_context4.t0);
+
+          case 12:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 8]]);
+  }));
+  return _deleteArticleDetail.apply(this, arguments);
+}
+
+function renderContents(_x3) {
+  return _renderContents.apply(this, arguments);
+}
+
+function _renderContents() {
+  _renderContents = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(slug) {
+    var article, trs, itemArr, i, new_td;
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            _context5.next = 3;
+            return getArticleDetail(slug);
+
+          case 3:
+            article = _context5.sent;
+            trs = document.querySelectorAll("tr");
+            itemArr = ["title", "pub_date", "views", "recommended", "contents"];
+
+            for (i = 0; i < itemArr.length; i++) {
+              new_td = document.createElement("td");
+
+              if (itemArr[i] == "views") {
+                new_td.innerHTML = article[itemArr[i]] + 1;
+                addViews(article);
+              } else {
+                new_td.innerHTML = article[itemArr[i]];
+              }
+
+              trs[i].appendChild(new_td);
+            }
+
+            _context5.next = 13;
+            break;
+
+          case 9:
+            _context5.prev = 9;
+            _context5.t0 = _context5["catch"](0);
+            console.log(_context5.t0);
+            console.error(_context5.t0);
+
+          case 13:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 9]]);
+  }));
   return _renderContents.apply(this, arguments);
 }
 
 renderContents(slug);
 window.goMain = goMain;
+window.goEdit = goEdit;
 window.deleteArticleDetail = deleteArticleDetail;
+window.addRecommended = addRecommended;
 
 /***/ }),
 

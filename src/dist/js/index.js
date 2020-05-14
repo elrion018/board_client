@@ -12318,8 +12318,7 @@ function goWrite() {
 function goContentsPage(e) {
   var node = e.target;
   var slug = node.parentNode.querySelector("td").innerHTML;
-  var name = slug;
-  location.href = "contents_page.html?" + name;
+  location.href = "contents_page.html?" + slug;
 }
 
 function getArticleList() {

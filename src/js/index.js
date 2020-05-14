@@ -11,8 +11,7 @@ function goContentsPage(e) {
   const node = e.target;
   const slug = node.parentNode.querySelector("td").innerHTML;
 
-  let name = slug;
-  location.href = "contents_page.html?" + name;
+  location.href = "contents_page.html?" + slug;
 }
 
 async function getArticleList() {

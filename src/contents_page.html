@@ -28,13 +28,18 @@
             <tr>
               <th>설정</th>
               <td>
-                <input type="button" value="수정" />
+                <input type="button" value="수정" onclick="goEdit()" />
                 <input
                   type="button"
                   value="삭제"
                   onclick="deleteArticleDetail()"
                 />
                 <input type="button" value="목록으로" onclick="goMain()" />
+                <input
+                  type="button"
+                  value="추천하기"
+                  onclick="addRecommended()"
+                />
               </td>
             </tr>
           </tbody>

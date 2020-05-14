@@ -12,7 +12,7 @@
       <table class="table table-bordered">
         <thead>
           <caption>
-            글쓰기
+            글수정
           </caption>
         </thead>
         <tbody>
@@ -38,6 +38,7 @@
                 ></textarea>
               </td>
             </tr>
+
             <tr>
               <th>비밀번호:</th>
               <td>
@@ -51,9 +52,13 @@
             <tr>
               <th>설정</th>
               <td>
-                <input type="button" value="등록" onclick="makeArticle()" />
+                <input type="button" value="수정" onclick="editArticle()" />
                 <input type="reset" value="reset" />
-                <input type="button" value="글 목록으로.." onclick="goMain()" />
+                <input
+                  type="button"
+                  value="본 글로 이동"
+                  onclick="goArticle()"
+                />
               </td>
             </tr>
           </form>
@@ -61,5 +66,5 @@
       </table>
     </div>
   </body>
-  <script src="./dist/js/write.js"></script>
+  <script src="./dist/js/contents_edit_page.js"></script>
 </html>
