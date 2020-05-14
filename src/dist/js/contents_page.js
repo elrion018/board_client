@@ -12307,7 +12307,14 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
+ /////
 
+var slug = location.href.split("?")[1];
+var container_div = document.querySelector(".container");
+
+function goMain() {
+  location.href = "index.html";
+}
 
 function getArticleDetail(_x) {
   return _getArticleDetail.apply(this, arguments);
@@ -12355,30 +12362,29 @@ function _getArticleDetail() {
   return _getArticleDetail.apply(this, arguments);
 }
 
-function renderContents(_x2) {
-  return _renderContents.apply(this, arguments);
+function deleteArticleDetail() {
+  return _deleteArticleDetail.apply(this, arguments);
 }
 
-function _renderContents() {
-  _renderContents = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(slug) {
-    var article, trs, itemArr, i, new_td;
+function _deleteArticleDetail() {
+  _deleteArticleDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var config, res;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            _context2.next = 3;
-            return getArticleDetail(Number(slug));
+            config = {};
+            console.log(slug, "ok");
+            _context2.next = 5;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), config);
 
-          case 3:
-            article = _context2.sent;
-            trs = document.querySelectorAll("tr");
-            itemArr = ["title", "pub_date", "views", "recommended", "contents"];
+          case 5:
+            res = _context2.sent;
 
-            for (i = 0; i < trs.length; i++) {
-              new_td = document.createElement("td");
-              new_td.innerHTML = article[itemArr[i]];
-              trs[i].appendChild(new_td);
+            if (res.status === 204) {
+              console.log(res);
+              location.replace("index.html");
             }
 
             _context2.next = 13;
@@ -12397,12 +12403,57 @@ function _renderContents() {
       }
     }, _callee2, null, [[0, 9]]);
   }));
+  return _deleteArticleDetail.apply(this, arguments);
+}
+
+function renderContents(_x2) {
   return _renderContents.apply(this, arguments);
 }
 
-var slug = location.href.split("?")[1];
-var container_div = document.querySelector(".container");
+function _renderContents() {
+  _renderContents = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(slug) {
+    var article, trs, itemArr, i, new_td;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return getArticleDetail(Number(slug));
+
+          case 3:
+            article = _context3.sent;
+            trs = document.querySelectorAll("tr");
+            itemArr = ["title", "pub_date", "views", "recommended", "contents"];
+
+            for (i = 0; i < itemArr.length; i++) {
+              new_td = document.createElement("td");
+              new_td.innerHTML = article[itemArr[i]];
+              trs[i].appendChild(new_td);
+            }
+
+            _context3.next = 13;
+            break;
+
+          case 9:
+            _context3.prev = 9;
+            _context3.t0 = _context3["catch"](0);
+            console.log(_context3.t0);
+            console.error(_context3.t0);
+
+          case 13:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 9]]);
+  }));
+  return _renderContents.apply(this, arguments);
+}
+
 renderContents(slug);
+window.goMain = goMain;
+window.deleteArticleDetail = deleteArticleDetail;
 
 /***/ }),
 
