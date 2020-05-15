@@ -12262,7 +12262,7 @@ try {
 /*!***********************!*\
   !*** ./src/js/api.js ***!
   \***********************/
-/*! exports provided: ADDRESS, URL_GET_ARTICLE_LIST, URL_POST_MAKE_ARTICLE, URL_GET_ARTICLE_DETAIL, URL_PUT_EDIT_ARTICLE, URL_DELETE_ARTICLE */
+/*! exports provided: ADDRESS, URL_GET_ARTICLE_LIST, URL_POST_MAKE_ARTICLE, URL_GET_ARTICLE_DETAIL, URL_PUT_EDIT_ARTICLE, URL_PUT_ADD_VIEWS, URL_DELETE_ARTICLE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12272,6 +12272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_POST_MAKE_ARTICLE", function() { return URL_POST_MAKE_ARTICLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_GET_ARTICLE_DETAIL", function() { return URL_GET_ARTICLE_DETAIL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_EDIT_ARTICLE", function() { return URL_PUT_EDIT_ARTICLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_ADD_VIEWS", function() { return URL_PUT_ADD_VIEWS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_DELETE_ARTICLE", function() { return URL_DELETE_ARTICLE; });
 var ADDRESS;
 ADDRESS = "http://127.0.0.1:8000"; //crud
@@ -12282,6 +12283,9 @@ var URL_GET_ARTICLE_DETAIL = function URL_GET_ARTICLE_DETAIL(slug) {
   return "".concat(ADDRESS, "/commom/article/").concat(slug);
 };
 var URL_PUT_EDIT_ARTICLE = function URL_PUT_EDIT_ARTICLE(slug) {
+  return "".concat(ADDRESS, "/commom/article/").concat(slug);
+};
+var URL_PUT_ADD_VIEWS = function URL_PUT_ADD_VIEWS(slug) {
   return "".concat(ADDRESS, "/commom/article/").concat(slug);
 };
 var URL_DELETE_ARTICLE = function URL_DELETE_ARTICLE(slug) {

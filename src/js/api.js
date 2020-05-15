@@ -10,4 +10,5 @@ export const URL_GET_ARTICLE_DETAIL = (slug) =>
   `${ADDRESS}/commom/article/${slug}`;
 export const URL_PUT_EDIT_ARTICLE = (slug) =>
   `${ADDRESS}/commom/article/${slug}`;
+export const URL_PUT_ADD_VIEWS = (slug) => `${ADDRESS}/commom/article/${slug}`;
 export const URL_DELETE_ARTICLE = (slug) => `${ADDRESS}/commom/article/${slug}`;

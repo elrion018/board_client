@@ -12262,7 +12262,7 @@ try {
 /*!***********************!*\
   !*** ./src/js/api.js ***!
   \***********************/
-/*! exports provided: ADDRESS, URL_GET_ARTICLE_LIST, URL_POST_MAKE_ARTICLE, URL_GET_ARTICLE_DETAIL, URL_PUT_EDIT_ARTICLE, URL_DELETE_ARTICLE */
+/*! exports provided: ADDRESS, URL_GET_ARTICLE_LIST, URL_POST_MAKE_ARTICLE, URL_GET_ARTICLE_DETAIL, URL_PUT_EDIT_ARTICLE, URL_PUT_ADD_VIEWS, URL_DELETE_ARTICLE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12272,6 +12272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_POST_MAKE_ARTICLE", function() { return URL_POST_MAKE_ARTICLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_GET_ARTICLE_DETAIL", function() { return URL_GET_ARTICLE_DETAIL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_EDIT_ARTICLE", function() { return URL_PUT_EDIT_ARTICLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_ADD_VIEWS", function() { return URL_PUT_ADD_VIEWS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_DELETE_ARTICLE", function() { return URL_DELETE_ARTICLE; });
 var ADDRESS;
 ADDRESS = "http://127.0.0.1:8000"; //crud
@@ -12282,6 +12283,9 @@ var URL_GET_ARTICLE_DETAIL = function URL_GET_ARTICLE_DETAIL(slug) {
   return "".concat(ADDRESS, "/commom/article/").concat(slug);
 };
 var URL_PUT_EDIT_ARTICLE = function URL_PUT_EDIT_ARTICLE(slug) {
+  return "".concat(ADDRESS, "/commom/article/").concat(slug);
+};
+var URL_PUT_ADD_VIEWS = function URL_PUT_ADD_VIEWS(slug) {
   return "".concat(ADDRESS, "/commom/article/").concat(slug);
 };
 var URL_DELETE_ARTICLE = function URL_DELETE_ARTICLE(slug) {
@@ -12337,7 +12341,7 @@ function _addViews() {
             data = new FormData();
             data.append("views", views);
             _context.next = 7;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_PUT_EDIT_ARTICLE"])(slug), data, config);
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_PUT_ADD_VIEWS"])(slug), data, config);
 
           case 7:
             res = _context.sent;
@@ -12378,36 +12382,40 @@ function _addRecommended() {
           case 0:
             _context2.prev = 0;
             config = {};
-            article = getArticleDetail(slug);
+            _context2.next = 4;
+            return getArticleDetail(slug);
+
+          case 4:
+            article = _context2.sent;
             recommended = article["recommended"] + 1;
             data = new FormData();
             data.append("recommended", recommended);
-            _context2.next = 8;
+            _context2.next = 10;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_PUT_EDIT_ARTICLE"])(slug), data, config);
 
-          case 8:
+          case 10:
             res = _context2.sent;
 
             if (res.status === 200) {
               console.log("add recommended");
-              location.reload();
+              document.querySelector(".recommended").innerHTML = recommended;
             }
 
-            _context2.next = 16;
+            _context2.next = 18;
             break;
 
-          case 12:
-            _context2.prev = 12;
+          case 14:
+            _context2.prev = 14;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
             console.error(_context2.t0);
 
-          case 16:
+          case 18:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 12]]);
+    }, _callee2, null, [[0, 14]]);
   }));
   return _addRecommended.apply(this, arguments);
 }
@@ -12464,39 +12472,46 @@ function deleteArticleDetail() {
 
 function _deleteArticleDetail() {
   _deleteArticleDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var config, res;
+    var config, data, password, res;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.prev = 0;
             config = {};
-            _context4.next = 4;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), config);
+            data = new FormData();
+            password = document.querySelector(".password_input").value;
+            console.log(password);
+            data.append("password", password);
+            console.log(data);
+            _context4.next = 9;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), data, config);
 
-          case 4:
+          case 9:
             res = _context4.sent;
 
             if (res.status === 204) {
               console.log(res);
               location.replace("index.html");
+            } else {
+              alert("비밀번호가 틀렸습니다!");
             }
 
-            _context4.next = 12;
+            _context4.next = 17;
             break;
 
-          case 8:
-            _context4.prev = 8;
+          case 13:
+            _context4.prev = 13;
             _context4.t0 = _context4["catch"](0);
             console.log(_context4.t0);
             console.error(_context4.t0);
 
-          case 12:
+          case 17:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 8]]);
+    }, _callee4, null, [[0, 13]]);
   }));
   return _deleteArticleDetail.apply(this, arguments);
 }
@@ -12525,9 +12540,11 @@ function _renderContents() {
               new_td = document.createElement("td");
 
               if (itemArr[i] == "views") {
+                new_td.setAttribute("class", itemArr[i]);
                 new_td.innerHTML = article[itemArr[i]] + 1;
                 addViews(article);
               } else {
+                new_td.setAttribute("class", itemArr[i]);
                 new_td.innerHTML = article[itemArr[i]];
               }
 
