@@ -4,6 +4,7 @@ import {
   URL_DELETE_ARTICLE,
   URL_PUT_EDIT_ARTICLE,
   URL_PUT_ADD_VIEWS,
+  URL_PUT_ADD_RECOMMENDED,
 } from "./api";
 
 /////
@@ -44,7 +45,7 @@ async function addRecommended() {
     const recommended = article["recommended"] + 1;
     let data = new FormData();
     data.append("recommended", recommended);
-    const res = await axios.put(URL_PUT_EDIT_ARTICLE(slug), data, config);
+    const res = await axios.put(URL_PUT_ADD_RECOMMENDED(slug), data, config);
     if (res.status === 200) {
       console.log("add recommended");
       document.querySelector(".recommended").innerHTML = recommended;
@@ -74,9 +75,7 @@ async function deleteArticleDetail() {
     const config = {};
     let data = new FormData();
     const password = document.querySelector(".password_input").value;
-    console.log(password);
     data.append("password", password);
-    console.log(data);
     const res = await axios.delete(URL_DELETE_ARTICLE(slug), data, config);
     if (res.status === 204) {
       console.log(res);

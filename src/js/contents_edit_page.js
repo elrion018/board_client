@@ -6,7 +6,6 @@ import { URL_PUT_EDIT_ARTICLE } from "./api";
 const slug = location.href.split("?")[1];
 
 function goArticle() {
-  // window.history.back();
   location.replace("contents_page.html" + slug);
 }
 

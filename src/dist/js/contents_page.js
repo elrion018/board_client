@@ -12262,32 +12262,42 @@ try {
 /*!***********************!*\
   !*** ./src/js/api.js ***!
   \***********************/
-/*! exports provided: ADDRESS, URL_GET_ARTICLE_LIST, URL_POST_MAKE_ARTICLE, URL_GET_ARTICLE_DETAIL, URL_PUT_EDIT_ARTICLE, URL_PUT_ADD_VIEWS, URL_DELETE_ARTICLE */
+/*! exports provided: ADDRESS, URL_GET_ARTICLE_LIST, URL_GET_ARTICLE_DETAIL, URL_POST_MAKE_ARTICLE, URL_POST_SEARCH_ARTICLE_LIST, URL_PUT_EDIT_ARTICLE, URL_PUT_ADD_VIEWS, URL_PUT_ADD_RECOMMENDED, URL_DELETE_ARTICLE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADDRESS", function() { return ADDRESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_GET_ARTICLE_LIST", function() { return URL_GET_ARTICLE_LIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_POST_MAKE_ARTICLE", function() { return URL_POST_MAKE_ARTICLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_GET_ARTICLE_DETAIL", function() { return URL_GET_ARTICLE_DETAIL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_POST_MAKE_ARTICLE", function() { return URL_POST_MAKE_ARTICLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_POST_SEARCH_ARTICLE_LIST", function() { return URL_POST_SEARCH_ARTICLE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_EDIT_ARTICLE", function() { return URL_PUT_EDIT_ARTICLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_ADD_VIEWS", function() { return URL_PUT_ADD_VIEWS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_ADD_RECOMMENDED", function() { return URL_PUT_ADD_RECOMMENDED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_DELETE_ARTICLE", function() { return URL_DELETE_ARTICLE; });
 var ADDRESS;
 ADDRESS = "http://127.0.0.1:8000"; //crud
+//GET
 
 var URL_GET_ARTICLE_LIST = "".concat(ADDRESS, "/commom/article");
-var URL_POST_MAKE_ARTICLE = "".concat(ADDRESS, "/commom/article");
 var URL_GET_ARTICLE_DETAIL = function URL_GET_ARTICLE_DETAIL(slug) {
   return "".concat(ADDRESS, "/commom/article/").concat(slug);
-};
+}; //POST
+
+var URL_POST_MAKE_ARTICLE = "".concat(ADDRESS, "/commom/article");
+var URL_POST_SEARCH_ARTICLE_LIST = "".concat(ADDRESS, "/commom/article/search"); //PUT
+
 var URL_PUT_EDIT_ARTICLE = function URL_PUT_EDIT_ARTICLE(slug) {
   return "".concat(ADDRESS, "/commom/article/").concat(slug);
 };
 var URL_PUT_ADD_VIEWS = function URL_PUT_ADD_VIEWS(slug) {
-  return "".concat(ADDRESS, "/commom/article/").concat(slug);
+  return "".concat(ADDRESS, "/commom/article/addViews/").concat(slug);
 };
+var URL_PUT_ADD_RECOMMENDED = function URL_PUT_ADD_RECOMMENDED(slug) {
+  return "".concat(ADDRESS, "/commom/article/addRecommended/").concat(slug);
+}; //DELETE
+
 var URL_DELETE_ARTICLE = function URL_DELETE_ARTICLE(slug) {
   return "".concat(ADDRESS, "/commom/article/").concat(slug);
 };
@@ -12391,7 +12401,7 @@ function _addRecommended() {
             data = new FormData();
             data.append("recommended", recommended);
             _context2.next = 10;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_PUT_EDIT_ARTICLE"])(slug), data, config);
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_PUT_ADD_RECOMMENDED"])(slug), data, config);
 
           case 10:
             res = _context2.sent;
@@ -12481,13 +12491,11 @@ function _deleteArticleDetail() {
             config = {};
             data = new FormData();
             password = document.querySelector(".password_input").value;
-            console.log(password);
             data.append("password", password);
-            console.log(data);
-            _context4.next = 9;
+            _context4.next = 7;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), data, config);
 
-          case 9:
+          case 7:
             res = _context4.sent;
 
             if (res.status === 204) {
@@ -12497,21 +12505,21 @@ function _deleteArticleDetail() {
               alert("비밀번호가 틀렸습니다!");
             }
 
-            _context4.next = 17;
+            _context4.next = 15;
             break;
 
-          case 13:
-            _context4.prev = 13;
+          case 11:
+            _context4.prev = 11;
             _context4.t0 = _context4["catch"](0);
             console.log(_context4.t0);
             console.error(_context4.t0);
 
-          case 17:
+          case 15:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 13]]);
+    }, _callee4, null, [[0, 11]]);
   }));
   return _deleteArticleDetail.apply(this, arguments);
 }
