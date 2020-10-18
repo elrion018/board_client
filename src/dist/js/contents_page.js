@@ -12277,7 +12277,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_ADD_RECOMMENDED", function() { return URL_PUT_ADD_RECOMMENDED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_DELETE_ARTICLE", function() { return URL_DELETE_ARTICLE; });
 var ADDRESS;
-ADDRESS = "http://127.0.0.1:8000"; //crud
+ADDRESS = "https://simple-crud-web-server.herokuapp.com"; //crud
 //GET
 
 var URL_GET_ARTICLE_LIST = "".concat(ADDRESS, "/commom/article");
@@ -12356,9 +12356,7 @@ function _addViews() {
           case 7:
             res = _context.sent;
 
-            if (res.status === 200) {
-              console.log("add views");
-            }
+            if (res.status === 200) {}
 
             _context.next = 15;
             break;
@@ -12407,7 +12405,6 @@ function _addRecommended() {
             res = _context2.sent;
 
             if (res.status === 200) {
-              console.log("add recommended");
               document.querySelector(".recommended").innerHTML = recommended;
             }
 
@@ -12493,13 +12490,12 @@ function _deleteArticleDetail() {
             password = document.querySelector(".password_input").value;
             data.append("password", password);
             _context4.next = 7;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), data, config);
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(Object(_api__WEBPACK_IMPORTED_MODULE_1__["URL_DELETE_ARTICLE"])(slug), data, config);
 
           case 7:
             res = _context4.sent;
 
             if (res.status === 204) {
-              console.log(res);
               location.replace("index.html");
             } else {
               alert("비밀번호가 틀렸습니다!");

@@ -12277,7 +12277,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_PUT_ADD_RECOMMENDED", function() { return URL_PUT_ADD_RECOMMENDED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_DELETE_ARTICLE", function() { return URL_DELETE_ARTICLE; });
 var ADDRESS;
-ADDRESS = "http://127.0.0.1:8000"; //crud
+ADDRESS = "https://simple-crud-web-server.herokuapp.com"; //crud
 //GET
 
 var URL_GET_ARTICLE_LIST = "".concat(ADDRESS, "/commom/article");

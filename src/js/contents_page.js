@@ -30,7 +30,6 @@ async function addViews(article) {
     const res = await axios.put(URL_PUT_ADD_VIEWS(slug), data, config);
 
     if (res.status === 200) {
-      console.log("add views");
     }
   } catch (error) {
     console.log(error);
@@ -47,7 +46,6 @@ async function addRecommended() {
     data.append("recommended", recommended);
     const res = await axios.put(URL_PUT_ADD_RECOMMENDED(slug), data, config);
     if (res.status === 200) {
-      console.log("add recommended");
       document.querySelector(".recommended").innerHTML = recommended;
     }
   } catch (error) {
@@ -76,9 +74,8 @@ async function deleteArticleDetail() {
     let data = new FormData();
     const password = document.querySelector(".password_input").value;
     data.append("password", password);
-    const res = await axios.delete(URL_DELETE_ARTICLE(slug), data, config);
+    const res = await axios.post(URL_DELETE_ARTICLE(slug), data, config);
     if (res.status === 204) {
-      console.log(res);
       location.replace("index.html");
     } else {
       alert("비밀번호가 틀렸습니다!");

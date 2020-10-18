@@ -22,7 +22,6 @@ async function makeArticle() {
     // data.append("recommended", 0);
     const res = await axios.post(URL_POST_MAKE_ARTICLE, data, config);
     if (res.status === 201) {
-      console.log(res.data);
       goMain();
     }
   } catch (error) {

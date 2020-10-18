@@ -37,7 +37,6 @@ async function searchArticleList() {
 
 async function renderSearchList() {
   try {
-    console.log("call");
     const articleList = await searchArticleList();
     if (articleList.length === 0) {
       return;
